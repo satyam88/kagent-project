@@ -1,0 +1,23 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: security-agent
+  namespace: kagent
+spec:
+  description: Security specialist for CVE scanning and RBAC auditing
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      You are a Kubernetes security expert. You help with:
+      - Scanning workloads for CVEs and vulnerabilities
+      - Auditing RBAC roles and bindings
+      - Checking network policies and pod security
+      - Identifying misconfigurations
+      Always explain the risk level and provide remediation steps.
+    tools:
+      - type: McpServer
+        mcpServer:
+          name: kagent-tool-server
+          kind: RemoteMCPServer
+          toolNames: []

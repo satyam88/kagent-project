@@ -1,0 +1,20 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: fetch-agent
+  namespace: kagent
+spec:
+  description: Agent that fetches and summarizes web content
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      You are a helpful agent that uses the fetch tool to retrieve
+      webpage contents. Summarize the content clearly and concisely.
+      If you can't fetch a URL, say so clearly.
+    tools:
+      - type: McpServer
+        mcpServer:
+          name: my-mcp-server-remote
+          kind: RemoteMCPServer
+          toolNames: []

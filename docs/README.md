@@ -1,0 +1,30 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: devops-agent
+  namespace: kagent
+spec:
+  description: DevOps automation expert for troubleshooting and operations
+  type: Declarative
+  declarative:
+    modelConfig: default-model-config
+    systemMessage: |
+      You are a DevOps automation expert. You help with:
+      - Diagnosing deployment issues and CrashLoopBackOff errors
+      - Analyzing application logs
+      - Troubleshooting network connectivity
+      - Optimizing resource usage
+      Always provide step-by-step reasoning and actionable solutions.
+    tools:
+      - type: McpServer
+        mcpServer:
+          name: kagent-tool-server
+          kind: RemoteMCPServer
+      - type: McpServer
+        mcpServer:
+          name: helm-mcp
+          kind: RemoteMCPServer
+      - type: McpServer
+        mcpServer:
+          name: prometheus-mcp
+          kind: RemoteMCPServer
